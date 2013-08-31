@@ -4,7 +4,7 @@
  "keywords": ["class", "inheritance", "prototype", "javascript", "superclass", "parent", "child", "inherit"],
  "dependencies":{},
  "devDependencies": {
-     "deadunit": "git+https://git@github.com/fresheneesz/deadunit.git#f4eaca6297aece8f47ce58a2a022463f5e27d48b"
+     "deadunit": "git+https://git@github.com/fresheneesz/deadunit.git"
  },
  "repository": {
    "type": "git",

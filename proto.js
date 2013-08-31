@@ -6,7 +6,7 @@
 
 */
 
-var prototypeName='prototype', undefined, protoUndefined='undefined', init='init'; // minifiable variables
+var prototypeName='prototype', undefined, protoUndefined='undefined', init='init', ownProperty=({}).hasOwnProperty; // minifiable variables
 function proto() {
 	var args = arguments // minifiable variables
 

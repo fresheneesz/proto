@@ -253,11 +253,11 @@ Unit.test("Testing proto", function() {
 		
 		    this.test('String', function() {
 		      var MyString = proto(String, function() {})
-		        , str = MyString('foo')
+		      var str = MyString('foo')
 		
 		      this.ok(str instanceof String)
-		      // todo: doesn't work yet
-		      // this.equal('foo', str.toString())
+
+		      // this.equal('foo', str.toString()) // todo: doesn't work yet
 		    })
 		
 		    this.test('Array', function() {
@@ -269,8 +269,8 @@ Unit.test("Testing proto", function() {
 		      // when you `apply` it to an instance of Array, it just creates
 		      // a new one for you.  Bah.
 		
-		      // this.ok(3, ary.length)
-		      // this.ok(1, ary[0])
+		      // this.equal(3, ary.length)
+		      // this.equal(1, ary[0])
 		    })
 		})
 		
