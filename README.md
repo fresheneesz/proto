@@ -64,5 +64,5 @@ var Parent = proto(function() {
     //
  ```
 
- note: you can't propertly access any non-writable properties of a function from the returned proto-object factory
- though the name property will work correctly on instances. This includes: `name`, `length`, `arguments`, and `caller`.
+ note: you can't properly access any non-writable properties of a function from the returned proto-object factory
+ though the properties will work correctly on instances. This includes: `name`, `length`, `arguments`, and `caller`.
