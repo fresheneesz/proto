@@ -8,16 +8,16 @@
 
 var prototypeName='prototype', undefined, protoUndefined='undefined', init='init', ownProperty=({}).hasOwnProperty; // minifiable variables
 function proto() {
-	var args = arguments // minifiable variables
+    var args = arguments // minifiable variables
 
-	if(args.length == 1) {
-		var parent = {}
-		var prototypeBuilder = args[0]
+    if(args.length == 1) {
+        var parent = {}
+        var prototypeBuilder = args[0]
 
-	} else { // length == 2
-		var parent = args[0]
-		var prototypeBuilder = args[1]
-	}
+    } else { // length == 2
+        var parent = args[0]
+        var prototypeBuilder = args[1]
+    }
 
     // special handling for Error objects
     if([Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError, URIError].indexOf(parent) !== -1) {
@@ -34,7 +34,7 @@ function proto() {
 
     // the prototype that will be used to make instances
     var prototype = new prototypeBuilder(parent)
-    prototype.constructor = ProtoObjectFactory;	// set the constructor property on the prototype
+    prototype.constructor = ProtoObjectFactory;    // set the constructor property on the prototype
 
     // if there's no init, assume its inheriting a non-proto class, so default to applying the superclass's constructor.
     if(!prototype[init] && parentIsFunction) {
@@ -43,30 +43,30 @@ function proto() {
         }
     }
 
-	// constructor for empty object which will be populated via the constructor
-	var F = function() {}
-		F[prototypeName] = prototype		// set the prototype for created instances
+    // constructor for empty object which will be populated via the constructor
+    var F = function() {}
+        F[prototypeName] = prototype    // set the prototype for created instances
 
-	function ProtoObjectFactory() { 	// result object factory
-		var x = new F()					// empty object
+    function ProtoObjectFactory() {     // result object factory
+        var x = new F()                 // empty object
 
-		if(prototype[init]) {
-            var result = prototype[init].apply(x, arguments)	// populate object via the constructor
+        if(prototype[init]) {
+            var result = prototype[init].apply(x, arguments)    // populate object via the constructor
             if(result === proto[protoUndefined])
-            	return undefined
+                return undefined
             else if(result !== undefined)
-            	return result
+                return result
             else
-            	return x
-		} else {
+                return x
+        } else {
             return x
-		}
-	}
+        }
+    }
 
     // add all the prototype properties onto the static class as well (so you can access that class when you want to reference superclass properties)
-	for(var n in prototype) {
+    for(var n in prototype) {
         ProtoObjectFactory[n] = prototype[n]
-	}
+    }
 
     ProtoObjectFactory[prototypeName] = prototype  // set the prototype on the object factory
 
