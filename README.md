@@ -57,7 +57,7 @@ Install
 =======
 
 ```
-npm install git+https://git@github.com/fresheneesz/proto.git
+npm install protojs
 ```
 
 
