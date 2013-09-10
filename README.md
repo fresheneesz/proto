@@ -70,7 +70,8 @@ var proto = require('proto') // node.js
 
 define(['proto'], function(proto) { ... } // amd
 
-proto; // proto.global.js defines proto globally if you really want to shun module-based design
+proto; // proto.global.js defines proto globally if you really 
+       //   want to shun module-based design
 ```
 
 Using proto:
@@ -88,8 +89,9 @@ var Parent = proto(function() {
    
     this.anythingElse = 5   // static properties can be accessed by the class and the instance
 
-    var privateFn = function(me, arg1, etc) {  // private functions don't have access to the correct 'this', so pass it in
-        me.x = arg1 + etc
+	var that = this // private functions don't have access to the correct 'this', so pass it in
+    var privateFn = function(me, arg1, etc) {  
+        that.x = arg1 + etc
     }
     this.doSomething = function() {
         privateFn(this, this.x, 1)
@@ -107,8 +109,9 @@ var Child = proto(Parent, function(superclass) {
         this.r = 10
         return this
     }
-
-    this.staticMethod = function(x) {        // create static methods just like instance methods - you can access them from the constructor
+	
+	// create static methods just like instance methods - you can access them from the constructor
+    this.staticMethod = function(x) {        
         return this.constructor(x+12)        // uses its own constructor to create a Child object
     }
 })
