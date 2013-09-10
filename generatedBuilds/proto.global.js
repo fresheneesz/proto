@@ -1,5 +1,14 @@
+/* Copyright (c) 2013 Billy Tetrud - Free to use for any purpose: MIT License*/
+// requires: jquery
+;(function(exports) {
+var module = {exports:exports}
 "use strict";
 /* Copyright (c) 2013 Billy Tetrud - Free to use for any purpose: MIT License*/
+
+/*  usage:
+
+
+*/
 
 var prototypeName='prototype', undefined, protoUndefined='undefined', init='init', ownProperty=({}).hasOwnProperty; // minifiable variables
 function proto() {
@@ -86,3 +95,4 @@ function normalizeErrorObject(ErrorObject) {
         NormalizedError.prototype = new IntermediateInheritor()
     return NormalizedError
 }
+})(this)
