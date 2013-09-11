@@ -57,7 +57,7 @@ Install
 =======
 
 ```
-npm install protojs
+npm install proto
 ```
 
 
