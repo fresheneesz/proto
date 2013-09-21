@@ -130,7 +130,27 @@ Limitations of `proto`
 * Inheriting from `Array` doesn't work.
 * Inheriting from `RegExp` doesn't work either (the results can't use the `test` or `match methods).
 * You can't properly access any non-writable properties of a function from the returned proto-object factory though the properties will work correctly on instances. This includes: `name`, `length`, `arguments`, and `caller`.
- 
+
+
+How to Contribute!
+============
+
+Anything helps:
+
+* Creating issues (aka tickets/bugs/etc). Please feel free to use issues to report bugs, request features, and discuss changes
+* Updating the documentation: ie this readme file. Be bold! Help create amazing documentation!
+* Submitting pull requests.
+
+How to submit pull requests:
+
+1. Please create an issue and get my input before spending too much time creating a feature. Work with me to ensure your feature or addition is optimal and fits with the purpose of the project.
+2. Fork the repository
+3. clone your forked repo onto your machine and run `npm install` at its root
+4. If you're gonna work on multiple separate things, its best to create a separate branch for each of them
+5. edit!
+6. When you're done, run the unit tests (at test/protoTest.js) and ensure they all pass
+7. Commit and push your changes
+8. Submit a pull request: https://help.github.com/articles/creating-a-pull-request
 
 Contributors
 ============
