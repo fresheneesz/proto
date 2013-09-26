@@ -22,7 +22,7 @@ Why Use proto?
 Example
 =======
 
-```
+```javascript
 var Person = proto(function() {       // prototype builder
     this.init = function(legs, arms) {      // constructor
         this.legs = legs
@@ -65,7 +65,7 @@ Usage
 =====
 
 Accessing proto:
-```
+```javascript
 var proto = require('proto') // node.js
 
 define(['proto'], function(proto) { ... } // amd
@@ -75,7 +75,7 @@ proto; // proto.global.js defines proto globally if you really
 ```
 
 Using proto:
-```
+```javascript
 var Parent = proto(function() {
     this.init = function(v) {   // constructor
         if(v > 0) {
