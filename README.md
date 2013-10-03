@@ -1,8 +1,10 @@
+**Status**: API finalized, needs testing
+
 `proto`
 =====
 
 A prototype-based inheritance/class library that makes it easy to create objects and inheritance hierarchies without losing the
-power of javascript's prototype system. 
+power of javascript's prototype system.
 
 Why Use proto?
 ==============
@@ -23,7 +25,7 @@ Example
 =======
 
 ```
-var Person = proto(function() {       // prototype builder
+var Person = proto(function() {             // prototype builder
     this.init = function(legs, arms) {      // constructor
         this.legs = legs
         this.arms = arms
@@ -37,13 +39,13 @@ var Person = proto(function() {       // prototype builder
     }
 })
 
-var Girl = proto(Person, function() { // inheritance
+var Girl = proto(Person, function() {       // inheritance
     this.haveBaby = function() {
         return Person(2,2)
     }
 })
 
-var g = Girl(2,2)        // instantiation
+var g = Girl(2,2)                          // instantiation
 g.getCaughtInBearTrap()
 console.log("Girl has "+g.limbs()+" limbs")
 console.log(": (")
@@ -66,11 +68,11 @@ Usage
 
 Accessing proto:
 ```
-var proto = require('proto') // node.js
+var proto = require('proto')              // node.js
 
 define(['proto'], function(proto) { ... } // amd
 
-proto; // proto.global.js defines proto globally if you really 
+proto; // proto.global.js defines proto globally if you really
        //   want to shun module-based design
 ```
 
@@ -86,11 +88,11 @@ var Parent = proto(function() {
 			return proto.undefined    // return undefined by using a special constructor return value
 		}
     }
-   
+
     this.anythingElse = 5   // static properties can be accessed by the class and the instance
 
 	var that = this // private functions don't have access to the correct 'this', so pass it in
-    var privateFn = function(me, arg1, etc) {  
+    var privateFn = function(me, arg1, etc) {
         that.x = arg1 + etc
     }
     this.doSomething = function() {
@@ -109,19 +111,18 @@ var Child = proto(Parent, function(superclass) {
         this.r = 10
         return this
     }
-	
+
 	// create static methods just like instance methods - you can access them from the constructor
-    this.staticMethod = function(x) {        
+    this.staticMethod = function(x) {
         return this.constructor(x+12)        // uses its own constructor to create a Child object
     }
 })
 
 var object = Child(1)                // instantiation
-object.doSomething()                  // method call (as usual)
+object.doSomething()                 // method call (as usual)
 var object2 = Child.staticMethod(1)  // static method call
 
  ```
-
 
 Limitations of `proto`
 =============================================
@@ -131,6 +132,15 @@ Limitations of `proto`
 * Inheriting from `RegExp` doesn't work either (the results can't use the `test` or `match methods).
 * You can't properly access any non-writable properties of a function from the returned proto-object factory though the properties will work correctly on instances. This includes: `name`, `length`, `arguments`, and `caller`.
 
+Todo
+====
+* Browser testing
+ * Chrome [ ]
+ * Firefox [ ]
+ * IE10 [ ]
+ * IE9 [ ]
+ * IE8 [ ]
+ * Opera [ ]
 
 How to Contribute!
 ============
@@ -148,14 +158,18 @@ How to submit pull requests:
 3. clone your forked repo onto your machine and run `npm install` at its root
 4. If you're gonna work on multiple separate things, its best to create a separate branch for each of them
 5. edit!
-6. When you're done, run the unit tests (at test/protoTest.js) and ensure they all pass
-7. Commit and push your changes
-8. Submit a pull request: https://help.github.com/articles/creating-a-pull-request
+6. If it's a code change, please add to the unit tests (at test/protoTest.js) to verify that your change
+7. When you're done, run the unit tests and ensure they all pass
+8. Commit and push your changes
+9. Submit a pull request: https://help.github.com/articles/creating-a-pull-request
 
 Contributors
 ============
 * Special thanks to [jayferd][jayferd], since I got most of the unit tests for `proto` from [his `pjs` project][pjs].
 
-
 [jayferd]: https://github.com/jayferd
 [pjs]: https://github.com/jayferd/pjs
+
+License
+=======
+Released under the MIT license: http://opensource.org/licenses/MIT
