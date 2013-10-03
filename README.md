@@ -24,8 +24,8 @@ Why Use proto?
 Example
 =======
 
-```
-var Person = proto(function() {             // prototype builder
+```javascript
+var Person = proto(function() {       // prototype builder
     this.init = function(legs, arms) {      // constructor
         this.legs = legs
         this.arms = arms
@@ -67,8 +67,8 @@ Usage
 =====
 
 Accessing proto:
-```
-var proto = require('proto')              // node.js
+```javascript
+var proto = require('proto') // node.js
 
 define(['proto'], function(proto) { ... } // amd
 
@@ -77,7 +77,7 @@ proto; // proto.global.js defines proto globally if you really
 ```
 
 Using proto:
-```
+```javascript
 var Parent = proto(function() {
     this.init = function(v) {   // constructor
         if(v > 0) {
@@ -166,6 +166,7 @@ How to submit pull requests:
 Contributors
 ============
 * Special thanks to [jayferd][jayferd], since I got most of the unit tests for `proto` from [his `pjs` project][pjs].
+
 
 [jayferd]: https://github.com/jayferd
 [pjs]: https://github.com/jayferd/pjs
