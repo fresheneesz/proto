@@ -171,6 +171,11 @@ Contributors
 [jayferd]: https://github.com/jayferd
 [pjs]: https://github.com/jayferd/pjs
 
+Change Log
+==========
+
+* 1.0.5 - fixing github dependencies
+
 License
 =======
 Released under the MIT license: http://opensource.org/licenses/MIT
