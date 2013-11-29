@@ -176,10 +176,12 @@ Contributors
 [jayferd]: https://github.com/jayferd
 [pjs]: https://github.com/jayferd/pjs
 
-Changelist
+Change Log
 =========
 
-* 1.0.5 - fixing custom error name in stacktraces
+* 1.0.5
+ * fixing custom error name in stacktraces
+ * fixing github dependencies
 
 License
 =======
