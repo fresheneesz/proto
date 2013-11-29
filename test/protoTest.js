@@ -218,9 +218,10 @@ Unit.test("Testing proto", function() {
                 })
 
                 var MyError = proto(Error, function(sclass) {
+                    this.name = 'MyError'
+
                     this.init = function() {
                         sclass.apply(this,arguments)
-                        this.name = 'MyError'
                     }
                 })
 
@@ -230,12 +231,14 @@ Unit.test("Testing proto", function() {
                     try {
                         throw ErrorObject('o noes')
                     } catch(e) {
+                        that.log(e.toString())
                         that.ok(e instanceof ErrorObject)
                         that.ok(e instanceof OriginalError)
 
                         that.equal(e.message, 'o noes')
                         that.equal(e.toString(), NewErrorName+': o noes')
                         that.ok(e.stack.indexOf('protoTest.js') !== -1) // has a stacktrace
+                        that.ok(e.stack.indexOf(NewErrorName) !== -1) // stacktrace has correct name
                     }
                 }
             })

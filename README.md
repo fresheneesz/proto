@@ -124,6 +124,11 @@ var object2 = Child.staticMethod(1)  // static method call
 
  ```
 
+Creating a custom Error object:
+```
+
+```
+
 Limitations of `proto`
 =============================================
 * Inheriting from `Error` and other exception types doesn't automatically set a correct `name` property, so you need to set it in the contructor manually.
@@ -170,6 +175,11 @@ Contributors
 
 [jayferd]: https://github.com/jayferd
 [pjs]: https://github.com/jayferd/pjs
+
+Changelist
+=========
+
+* 1.0.5 - fixing custom error name in stacktraces
 
 License
 =======

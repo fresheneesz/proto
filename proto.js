@@ -15,8 +15,9 @@ function proto() {
     }
 
     // special handling for Error objects
+    var namePointer = {}
     if([Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError, URIError].indexOf(parent) !== -1) {
-        parent = normalizeErrorObject(parent)
+        parent = normalizeErrorObject(parent, namePointer)
     }
 
     // set up the parent into the prototype chain if a parent is passed
@@ -30,6 +31,7 @@ function proto() {
     // the prototype that will be used to make instances
     var prototype = new prototypeBuilder(parent)
     prototype.constructor = ProtoObjectFactory;    // set the constructor property on the prototype
+    namePointer.name = prototype.name
 
     // if there's no init, assume its inheriting a non-proto class, so default to applying the superclass's constructor.
     if(!prototype[init] && parentIsFunction) {
@@ -72,9 +74,10 @@ proto[protoUndefined] = {} // a special marker for when you want to return undef
 
 module.exports = proto
 
-function normalizeErrorObject(ErrorObject) {
+function normalizeErrorObject(ErrorObject, namePointer) {
     function NormalizedError() {
         var tmp = ErrorObject.apply(this, arguments);
+        tmp.name = namePointer.name
 
         this.stack = tmp.stack
         this.message = tmp.message
