@@ -179,9 +179,8 @@ Contributors
 Change Log
 =========
 
-* 1.0.5
- * fixing custom error name in stacktraces
- * fixing github dependencies
+* 1.0.6 - fixing custom error name in stacktraces
+* 1.0.5 - fixing github dependencies
 
 License
 =======
