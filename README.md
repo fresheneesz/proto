@@ -125,8 +125,17 @@ var object2 = Child.staticMethod(1)  // static method call
  ```
 
 Creating a custom Error object:
-```
+```javascript
+var CustomError = proto(Error, function(superclass) {
+    this.name = 'CustomError'
 
+    this.init = function(msg, properties) {
+        superclass.call(this, msg)
+        for(var n in properties) {
+            this[n] = properties[n]
+        }
+    }
+})
 ```
 
 Limitations of `proto`
