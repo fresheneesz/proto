@@ -188,6 +188,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.7 - getting rid of useless line in stack trace
 * 1.0.6 - fixing custom error name in stacktraces
 * 1.0.5 - fixing github dependencies
 

@@ -76,7 +76,7 @@ module.exports = proto
 
 function normalizeErrorObject(ErrorObject, namePointer) {
     function NormalizedError() {
-        var tmp = ErrorObject.apply(this, arguments);
+        var tmp = new ErrorObject(arguments[0])
         tmp.name = namePointer.name
 
         this.stack = tmp.stack
