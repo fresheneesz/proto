@@ -145,6 +145,7 @@ Limitations of `proto`
 * Inheriting from `Array` doesn't work.
 * Inheriting from `RegExp` doesn't work either (the results can't use the `test` or `match methods).
 * You can't properly access any non-writable properties of a function from the returned proto-object factory though the properties will work correctly on instances. This includes: `name`, `length`, `arguments`, and `caller`.
+* Some properties are read-only and so can't be reset on the prototype object. An example is `name` on firefox.
 
 Todo
 ====
@@ -188,6 +189,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.8 - if a static property can't be written (because it's read only or for some other reason throws an exception when being set), it will now silently not set, instead of throwing an exception
 * 1.0.7 - getting rid of useless line in stack trace
 * 1.0.6 - fixing custom error name in stacktraces
 * 1.0.5 - fixing github dependencies

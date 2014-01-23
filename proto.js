@@ -62,7 +62,11 @@ function proto() {
 
     // add all the prototype properties onto the static class as well (so you can access that class when you want to reference superclass properties)
     for(var n in prototype) {
-        ProtoObjectFactory[n] = prototype[n]
+        try {
+            ProtoObjectFactory[n] = prototype[n]
+        } catch(e) {
+            // do nothing, if a property (like `name`) can't be set, just ignore it
+        }
     }
 
     ProtoObjectFactory[prototypeName] = prototype  // set the prototype on the object factory
