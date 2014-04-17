@@ -4,16 +4,15 @@
  "description": "A prototype-based inheritance library that makes it easy to create objects and inheritance hierarchies without losing the power of javascript's prototype system.",
  "keywords": ["class", "inheritance", "prototype", "javascript", "superclass", "parent", "child", "inherit"],
  "dependencies":{
-   "buildModules":"https://github.com/fresheneesz/buildModules/archive/2f50ea0830b0fa580c087b4bfa947de2e7b7d7c3.tar.gz"
  },
  "devDependencies": {
-     "deadunit": ""
+     "deadunit": "",
+     "buildModules":"https://github.com/fresheneesz/buildModules/archive/2f50ea0830b0fa580c087b4bfa947de2e7b7d7c3.tar.gz"
  },
  "repository": {
    "type": "git",
    "url": "git://github.com/fresheneesz/proto"
  },
  "scripts": {
-   "postinstall": "node build.js"
  }
 }
