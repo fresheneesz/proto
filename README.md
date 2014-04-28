@@ -139,7 +139,7 @@ var CustomError = proto(Error, function(superclass) {
 
 Limitations of `proto`
 =============================================
-* Inheriting from `Error` and other exception types doesn't automatically set a correct `name` property, so you need to set it in the contructor manually.
+* Inheriting from `Error` and other exception types doesn't automatically set a correct `name` property, so you need to set it as a static properly "manually".
 * Objects inheriting from `String` can't use the `toString` method. 
 * Inheriting from `Array` doesn't work.
 * Inheriting from `RegExp` doesn't work either (the results can't use the `test` or `match methods).
