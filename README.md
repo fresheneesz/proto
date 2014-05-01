@@ -90,10 +90,11 @@ var Parent = proto(function() {
 
     this.anythingElse = 5   // static properties can be accessed by the class and the instance
 
-	var that = this // private functions don't have access to the correct 'this', so pass it in
-    var privateFn = function(me, arg1, etc) {
+	// private functions don't have access to the correct 'this', so pass it in
+    var privateFn = function(that, arg1, etc) {
         that.x = arg1 + etc
     }
+
     this.doSomething = function() {
         privateFn(this, this.x, 1)
     }
@@ -107,8 +108,8 @@ var Parent = proto(function() {
 var Child = proto(Parent, function(superclass) {
     this.init = function() {
         superclass.init.call(this, arguments) // super-class method call
+        // superclass.prototype.init.call(this, arguments) // remember that you probably need to access superclass.prototype for parents that aren't proto objects
         this.r = 10
-        return this
     }
 
 	// create static methods just like instance methods - you can access them from the constructor
