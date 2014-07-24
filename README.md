@@ -189,6 +189,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.10 - making the stack property a getter (like it is in native error objects
 * 1.0.8 - if a static property can't be written (because it's read only or for some other reason throws an exception when being set), it will now silently not set, instead of throwing an exception
 * 1.0.7 - getting rid of useless line in stack trace
 * 1.0.6 - fixing custom error name in stacktraces

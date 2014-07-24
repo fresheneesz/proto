@@ -83,8 +83,12 @@ function normalizeErrorObject(ErrorObject, namePointer) {
         var tmp = new ErrorObject(arguments[0])
         tmp.name = namePointer.name
 
-        this.stack = tmp.stack
         this.message = tmp.message
+        /*this.stack = */Object.defineProperty(this, 'stack', { // getter for more optimizy goodness
+            get: function() {
+                return tmp.stack
+            }
+        })
 
         return this
     }
