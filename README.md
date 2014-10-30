@@ -36,6 +36,12 @@ var Person = proto(function() {       // prototype builder
     this.limbs = function() {
         return this.arms + this.legs
     }
+    Object.defineProperty(this, 'limbs', { // getters (and setters, etc) can be set right on the prototype!
+        get: function() {
+            return this.arms + this.legs
+        }
+    })
+
 })
 
 var Girl = proto(Person, function() {       // inheritance
@@ -46,11 +52,11 @@ var Girl = proto(Person, function() {       // inheritance
 
 var g = Girl(2,2)                          // instantiation
 g.getCaughtInBearTrap()
-console.log("Girl has "+g.limbs()+" limbs")
+console.log("Girl has "+g.limbs+" limbs")
 console.log(": (")
 
 var newPerson = g.haveBaby()
-console.log("New person has" +newPerson.limbs()+" limbs : )")
+console.log("New person has" +newPerson.limbs+" limbs : )")
  ```
 
 
@@ -89,6 +95,17 @@ var Parent = proto(function() {
     }
 
     this.anythingElse = 5   // static properties can be accessed by the class and the instance
+
+    // getters and setters (enumerable makes it available statically too! Ie)
+    Object.defineProperty(this, 'moose', {
+        enumerable: true,
+        get: function() {
+            return 5
+        },
+        set: function() {
+            console.log("just kidding, i'm not setting anything!")
+        }
+    })
 
 	// private functions don't have access to the correct 'this', so pass it in
     var privateFn = function(that, arg1, etc) {
@@ -189,7 +206,8 @@ Contributors
 Change Log
 =========
 
-* 1.0.10 - making the stack property a getter (like it is in native error objects
+* 1.0.11 - adding the ability to access getters and setters correctly statically
+* 1.0.10 - making the stack property a getter (like it is in native error objects)
 * 1.0.8 - if a static property can't be written (because it's read only or for some other reason throws an exception when being set), it will now silently not set, instead of throwing an exception
 * 1.0.7 - getting rid of useless line in stack trace
 * 1.0.6 - fixing custom error name in stacktraces

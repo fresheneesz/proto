@@ -62,10 +62,13 @@ function proto() {
 
     // add all the prototype properties onto the static class as well (so you can access that class when you want to reference superclass properties)
     for(var n in prototype) {
-        try {
-            ProtoObjectFactory[n] = prototype[n]
-        } catch(e) {
-            // do nothing, if a property (like `name`) can't be set, just ignore it
+        addProperty(ProtoObjectFactory, prototype, n)
+    }
+
+    // add properties from parent that don't exist in the static class object yet (to get thing in like
+    for(var n in parent) {
+        if(Object.hasOwnProperty.call(parent, n) && ProtoObjectFactory[n] === undefined) {
+            addProperty(ProtoObjectFactory, parent, n)
         }
     }
 
@@ -84,11 +87,15 @@ function normalizeErrorObject(ErrorObject, namePointer) {
         tmp.name = namePointer.name
 
         this.message = tmp.message
-        /*this.stack = */Object.defineProperty(this, 'stack', { // getter for more optimizy goodness
-            get: function() {
-                return tmp.stack
-            }
-        })
+        if(Object.defineProperty) {
+            /*this.stack = */Object.defineProperty(this, 'stack', { // getter for more optimizy goodness
+                get: function() {
+                    return tmp.stack
+                }
+            })
+        } else {
+            this.stack = tmp.stack
+        }
 
         return this
     }
@@ -96,4 +103,17 @@ function normalizeErrorObject(ErrorObject, namePointer) {
             IntermediateInheritor.prototype = ErrorObject.prototype
         NormalizedError.prototype = new IntermediateInheritor()
     return NormalizedError
+}
+
+function addProperty(factoryObject, prototype, property) {
+    try {
+        var info = Object.getOwnPropertyDescriptor(prototype, property)
+        if(info.get !== undefined || info.get !== undefined && Object.defineProperty !== undefined) {
+            Object.defineProperty(factoryObject, property, info)
+        } else {
+            factoryObject[property] = prototype[property]
+        }
+    } catch(e) {
+        // do nothing, if a property (like `name`) can't be set, just ignore it
+    }
 }

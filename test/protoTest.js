@@ -118,6 +118,31 @@ Unit.test("Testing proto", function() {
 		var x = StringObject()
 		this.equal(x, '')
     })
+
+    this.test('testing with defineProperty', function() {
+        var x = 1
+
+        var A = proto(function() {
+            Object.defineProperty(this, 'moose', {
+                enumerable: true,
+                get: function() {
+                    return x
+                }
+            })
+        })
+
+        var B = proto(A, function() {
+
+        })
+
+        var c = B()
+
+        x = 5
+
+        this.ok(A.moose === 5, A.moose)
+        this.ok(B.moose === 5, B.moose)
+        this.ok(c.moose === 5)
+    })
     
     this.test('tests ported from jayferd/pjs', function() {
 		
