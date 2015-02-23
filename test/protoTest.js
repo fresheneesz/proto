@@ -24,6 +24,7 @@ Unit.test("Testing proto", function() {
 
     this.ok(Person.parent instanceof Object)
     this.ok(Person.parent.parent === undefined)
+    this.ok(Person.name !== 'undefined') // testing for former bug
 
     var testPerson = function(me, p) {
         me.ok(p.legs === 2)

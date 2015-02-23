@@ -127,7 +127,12 @@ function addProperty(factoryObject, prototype, property) {
 
 // returns the function named with the passed name
 function namedFunction(name, fn) {
-    return new Function('fn',
-        "return function " + name + "(){ return fn.apply(this,arguments)}"
-    )(fn)
+    if(name !== undefined) {
+        return new Function('fn',
+            "return function " + name + "(){ return fn.apply(this,arguments)}"
+        )(fn)
+    } else {
+        return fn
+    }
+
 }

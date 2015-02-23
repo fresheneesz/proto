@@ -218,6 +218,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.14 - fixing the name property so if there is no name, 'undefined' doesn't become the functions name
 * 1.0.13 - adding a 'parent' property on the returned proto class
 * 1.0.12 - making the constructor's name property settable (via `this.name` in the class construction function - the function passed to proto)
 * 1.0.11 - adding the ability to access getters and setters correctly statically
