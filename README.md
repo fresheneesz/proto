@@ -124,7 +124,7 @@ var Parent = proto(function() {
         // [anything else]: that object itself
 var Child = proto(Parent, function(superclass) {
     this.init = function() {
-        superclass.init.call(this, arguments) // super-class method call
+        superclass.init.apply(this, arguments) // super-class method call
         // superclass.prototype.init.call(this, arguments) // remember that you probably need to access superclass.prototype for parents that aren't proto objects
         this.r = 10
     }
