@@ -1,12 +1,14 @@
 "use strict";
 /* Copyright (c) 2013 Billy Tetrud - Free to use for any purpose: MIT License*/
 
+var noop = function() {}
+
 var prototypeName='prototype', undefined, protoUndefined='undefined', init='init', ownProperty=({}).hasOwnProperty; // minifiable variables
 function proto() {
     var args = arguments // minifiable variables
 
     if(args.length == 1) {
-        var parent = {}
+        var parent = {init: noop}   // set noop init so that every parent has an init
         var prototypeBuilder = args[0]
 
     } else { // length == 2
@@ -15,7 +17,7 @@ function proto() {
     }
 
     // special handling for Error objects
-    var namePointer = {}
+    var namePointer = {}    // name used only for Error Objects
     if([Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError, URIError].indexOf(parent) !== -1) {
         parent = normalizeErrorObject(parent, namePointer)
     }
@@ -30,22 +32,10 @@ function proto() {
 
     // the prototype that will be used to make instances
     var prototype = new prototypeBuilder(parent)
-    prototype.constructor = ProtoObjectFactory;    // set the constructor property on the prototype
     namePointer.name = prototype.name
 
-    // if there's no init, assume its inheriting a non-proto class, so default to applying the superclass's constructor.
-    if(!prototype[init] && parentIsFunction) {
-        prototype[init] = function() {
-            parent.apply(this, arguments)
-        }
-    }
-
-    // constructor for empty object which will be populated via the constructor
-    var F = function() {}
-        F[prototypeName] = prototype    // set the prototype for created instances
-
-    function ProtoObjectFactory() {     // result object factory
-        var x = new F()                 // empty object
+    var ProtoObjectFactory = namedFunction(prototype.name, function() {     // result object factory
+        var x = new F()          // empty object
 
         if(prototype[init]) {
             var result = prototype[init].apply(x, arguments)    // populate object via the constructor
@@ -58,7 +48,21 @@ function proto() {
         } else {
             return x
         }
+    })
+
+    prototype.constructor = ProtoObjectFactory;    // set the constructor property on the prototype
+
+
+    // if there's no init, assume its inheriting a non-proto class, so default to applying the superclass's constructor.
+    if(!prototype[init] && parentIsFunction) {
+        prototype[init] = function() {
+            parent.apply(this, arguments)
+        }
     }
+
+    // constructor for empty object which will be populated via the constructor
+    var F = function() {}
+        F[prototypeName] = prototype    // set the prototype for created instances
 
     // add all the prototype properties onto the static class as well (so you can access that class when you want to reference superclass properties)
     for(var n in prototype) {
@@ -99,9 +103,11 @@ function normalizeErrorObject(ErrorObject, namePointer) {
 
         return this
     }
-        var IntermediateInheritor = function() {}
-            IntermediateInheritor.prototype = ErrorObject.prototype
-        NormalizedError.prototype = new IntermediateInheritor()
+
+    var IntermediateInheritor = function() {}
+        IntermediateInheritor.prototype = ErrorObject.prototype
+    NormalizedError.prototype = new IntermediateInheritor()
+
     return NormalizedError
 }
 
@@ -116,4 +122,11 @@ function addProperty(factoryObject, prototype, property) {
     } catch(e) {
         // do nothing, if a property (like `name`) can't be set, just ignore it
     }
+}
+
+// returns the function named with the passed name
+function namedFunction(name, fn) {
+    return new Function('fn',
+        "return function " + name + "(){ return fn.apply(this,arguments)}"
+    )(fn)
 }

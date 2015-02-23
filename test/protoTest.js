@@ -148,7 +148,8 @@ Unit.test("Testing proto", function() {
 		
 		this.test('creating idiomatic classes', function() {
 			var MyClass = proto(function() {
-			  this.foo = 1
+                this.name = "MyClassYo"
+			    this.foo = 1
 			})
 			
 			this.equal('function', typeof MyClass) // creates functions
@@ -158,12 +159,13 @@ Unit.test("Testing proto", function() {
 			this.ok(MyClass() instanceof MyClass)
 			
 			this.test('respects `.constructor`', function() {
-			  var o = MyClass()
-			  this.ok(o.constructor === MyClass)
-			
-			  var o2 = o.constructor()
-			  this.ok(o2 instanceof MyClass)
-			  this.ok(o2.foo === 1)
+                  var o = MyClass()
+                  this.ok(o.constructor === MyClass)
+                  this.ok(o.constructor.name === 'MyClassYo', o.constructor.name) // constructor is named properly
+
+                  var o2 = o.constructor()
+                  this.ok(o2 instanceof MyClass)
+                  this.ok(o2.foo === 1)
 			})
 		})
 		

@@ -166,6 +166,7 @@ Limitations of `proto`
 
 Todo
 ====
+* Properly set the name propety on the returned object (can this be done?)
 * Browser testing
  * Chrome [ ]
  * Firefox [ ]
@@ -206,6 +207,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.12 - making the constructor's name property settable (via `this.name` in the class construction function - the function passed to proto)
 * 1.0.11 - adding the ability to access getters and setters correctly statically
 * 1.0.10 - making the stack property a getter (like it is in native error objects)
 * 1.0.8 - if a static property can't be written (because it's read only or for some other reason throws an exception when being set), it will now silently not set, instead of throwing an exception
