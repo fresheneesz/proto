@@ -11,6 +11,7 @@ Why Use proto?
 * constructors are inheritable
 * non-objects can be returned from a constructor (even `undefined`)!
 * easy access to an object's superclass
+* you can give your classes dynamic names
 * you don't hafta use the `new` operator
 * native objects work with `proto`. `proto` properly* creates classes that inherit from native objects - even all the `Error` types. *_Inheriting javascript objects has some limitations (see below)_
 * [`prototype` and `constructor` properties][javascriptFunctionProperties] are propertly set
@@ -84,7 +85,14 @@ proto; // proto.global.js defines proto globally if you really
 Using proto:
 ```javascript
 var Parent = proto(function() {
+    this; // points to the prototype, so set methods and static properties on this
+
+    // the name property has an impact on how proto classes are displayed in dev tools
+    this.name = 'MyProto; // set a name for your proto class
+
     this.init = function(v) {   // constructor
+        this; // inside methods, 'this' references the instance
+
         if(v > 0) {
             this.x = v                // you can normally access the object with this inside methods
         } else if(v !== undefined) {
@@ -117,6 +125,8 @@ var Parent = proto(function() {
     }
 })
 
+Parent.name;  // the name property can be accessed directly from the returned proto class object
+
 // you can inherit from any object!
 // the resulting object factory will generate instances inheriting from:
     // [if you inherit from]
@@ -124,7 +134,7 @@ var Parent = proto(function() {
         // [anything else]: that object itself
 var Child = proto(Parent, function(superclass) {
     this.init = function() {
-        superclass.init.apply(this, arguments) // super-class method call
+        superclass.init.call(this, arguments) // super-class method call
         // superclass.prototype.init.call(this, arguments) // remember that you probably need to access superclass.prototype for parents that aren't proto objects
         this.r = 10
     }
@@ -138,6 +148,8 @@ var Child = proto(Parent, function(superclass) {
 var object = Child(1)                // instantiation
 object.doSomething()                 // method call (as usual)
 var object2 = Child.staticMethod(1)  // static method call
+
+Child.parent === Parent; // the 'parent' property on the will point to the proto class's parent
 
  ```
 
@@ -166,7 +178,6 @@ Limitations of `proto`
 
 Todo
 ====
-* Properly set the name propety on the returned object (can this be done?)
 * Browser testing
  * Chrome [ ]
  * Firefox [ ]
@@ -207,6 +218,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.13 - adding a 'parent' property on the returned proto class
 * 1.0.12 - making the constructor's name property settable (via `this.name` in the class construction function - the function passed to proto)
 * 1.0.11 - adding the ability to access getters and setters correctly statically
 * 1.0.10 - making the stack property a getter (like it is in native error objects)

@@ -22,6 +22,9 @@ Unit.test("Testing proto", function() {
         }
     })
 
+    this.ok(Person.parent instanceof Object)
+    this.ok(Person.parent.parent === undefined)
+
     var testPerson = function(me, p) {
         me.ok(p.legs === 2)
         p.getCaughtInBearTrap()
@@ -41,17 +44,19 @@ Unit.test("Testing proto", function() {
 
     })
 
-    var Girl = proto(Person, function() {
-        this.init = function(legs, arms) {
-            Person.init.call(this, legs, arms) // test super-method calls
-        }
-
-        this.haveBaby = function() {
-            return Person(2,2)
-        }
-    })
-
     this.test("Inheriting", function() {
+        var Girl = proto(Person, function() {
+            this.init = function(legs, arms) {
+                Person.init.call(this, legs, arms) // test super-method calls
+            }
+
+            this.haveBaby = function() {
+                return Person(2,2)
+            }
+        })
+
+        this.ok(Girl.parent === Person)
+
         var g = Girl(2, 2)
         testPerson(this, g)
 

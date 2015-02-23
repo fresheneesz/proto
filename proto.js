@@ -69,13 +69,14 @@ function proto() {
         addProperty(ProtoObjectFactory, prototype, n)
     }
 
-    // add properties from parent that don't exist in the static class object yet (to get thing in like
+    // add properties from parent that don't exist in the static class object yet
     for(var n in parent) {
         if(Object.hasOwnProperty.call(parent, n) && ProtoObjectFactory[n] === undefined) {
             addProperty(ProtoObjectFactory, parent, n)
         }
     }
 
+    ProtoObjectFactory.parent = parent;            // special parent property only available on the returned proto class
     ProtoObjectFactory[prototypeName] = prototype  // set the prototype on the object factory
 
     return ProtoObjectFactory;
