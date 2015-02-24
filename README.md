@@ -16,7 +16,7 @@ Why Use proto?
 * native objects work with `proto`. `proto` properly* creates classes that inherit from native objects - even all the `Error` types. *_Inheriting javascript objects has some limitations (see below)_
 * [`prototype` and `constructor` properties][javascriptFunctionProperties] are propertly set
 * `proto` doesn't use `Object.create` so it should work with older browsers ( *testers welcome!* )
-* `proto` is small: ( __896 bytes minified and in AMD format__ )
+* `proto` is small: ( __1.69 KB minified and in UMD format__ )
 * `proto` is lightweight. It doesn't attempt to emulate class-based languages or create any fancy features you probably don't actually need (interfaces, abstract classes, etc)
 
 [javascriptFunctionProperties]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
@@ -74,11 +74,16 @@ Usage
 
 Accessing proto:
 ```javascript
-var proto = require('proto') // node.js
+// node.js
+var proto = require('proto')
 
-define(['proto'], function(proto) { ... } // amd
+// amd
+require.config({paths: {proto: '../generatedBuilds/proto.umd.js'}})
+require(['proto'], function(proto) { /* your code */ })
 
-proto; // proto.global.js defines proto globally if you really
+// global variable
+<script src="proto.umd.js"></script>
+proto; // proto.umd.js can define proto globally if you really
        //   want to shun module-based design
 ```
 
@@ -218,6 +223,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.15 - changing to using webpack to make UMD packages
 * 1.0.14 - fixing the name property so if there is no name, 'undefined' doesn't become the functions name
 * 1.0.13 - adding a 'parent' property on the returned proto class
 * 1.0.12 - making the constructor's name property settable (via `this.name` in the class construction function - the function passed to proto)
