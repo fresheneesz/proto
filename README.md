@@ -185,12 +185,21 @@ Limitations of `proto`
 Todo
 ====
 * Browser testing
- * Chrome [ ]
- * Firefox [ ]
+ * Chrome [x]
+ * Firefox [x]
+ * IE11 [ ]
  * IE10 [ ]
  * IE9 [ ]
  * IE8 [ ]
  * Opera [ ]
+
+* performance improvements
+    * Combine ProtoObjectFactory with the NamedFunction so you remove a function call there
+    * memoize whether the class has 'init' or not (to remove one branch from ProtoObjectFactory)
+
+* Consider creating a Proto2 that focuses on further performance improvements:
+    * Requires the use of 'new'
+    * Maybe sacrifices dynamic prototypes (that change after constructor creation) to get rid of the prototype chain walking (and just merges in functions)
 
 How to Contribute!
 ============
