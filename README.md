@@ -18,6 +18,7 @@ Why Use proto?
 * `proto` doesn't use `Object.create` so it should work with older browsers ( *testers welcome!* )
 * `proto` is small: ( __1.69 KB minified and in UMD format__ )
 * `proto` is lightweight. It doesn't attempt to emulate class-based languages or create any fancy features you probably don't actually need (interfaces, abstract classes, etc)
+* It has solid performance: [method calls](http://jsperf.com/js-inheritance-performance-method-calls), [instance creation](http://jsperf.com/js-inheritance-instances)
 
 [javascriptFunctionProperties]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
 
