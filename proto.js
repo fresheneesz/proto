@@ -76,7 +76,7 @@ function proto() {
 
     // add properties from parent that don't exist in the static class object yet
     for(var n in parent) {
-        if(Object.hasOwnProperty.call(parent, n) && ProtoObjectFactory[n] === undefined) {
+        if(ownProperty.call(parent, n) && ProtoObjectFactory[n] === undefined) {
             addProperty(ProtoObjectFactory, parent, n)
         }
     }

@@ -2,7 +2,7 @@ var fs = require('fs')
 var path = require("path")
 var buildModule = require("build-modules")
 
-var buildDirectory = __dirname+'/generatedBuilds/'
+var buildDirectory = path.join(__dirname,'dist')
 if(!fs.existsSync(buildDirectory)) {
     fs.mkdirSync(buildDirectory)
 }
@@ -10,7 +10,7 @@ if(!fs.existsSync(buildDirectory)) {
 var copywrite = '/* Copyright (c) 2013 Billy Tetrud - Free to use for any purpose: MIT License*/'
 
 console.log('building and minifying...')
-build('proto', false, {output: {path:__dirname+'/generatedBuilds'}, header: copywrite})
+build('proto', false, {output: {path:buildDirectory}, header: copywrite})
 
 
 

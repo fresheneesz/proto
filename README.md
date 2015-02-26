@@ -235,6 +235,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.17 - Correcting distribution
 * 1.0.16 - optimizing instance creation
 * 1.0.15 - changing to using webpack to make UMD packages
 * 1.0.14 - fixing the name property so if there is no name, 'undefined' doesn't become the functions name

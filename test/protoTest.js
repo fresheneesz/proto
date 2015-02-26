@@ -3,6 +3,8 @@
 var Unit = require('deadunit')
 var proto = require('../proto')
 
+require("../build") // build every you test so you don't forget to update the bundle
+
 Unit.test("Testing proto", function() {
 	var Person = proto(function() {
         this.heads = 1              // static properties and inherited (prototype) properties are unified ..
