@@ -17,9 +17,9 @@ Why Use proto?
 * native objects work with `proto`. `proto` properly* creates classes that inherit from native objects - even all the `Error` types. *_Inheriting certain native javascript objects has some limitations (see below)_
 * [`prototype` and `constructor` properties][javascriptFunctionProperties] are propertly set
 * `proto` doesn't use `Object.create` so it should work with older browsers ( *testers welcome!* )
-* `proto` is small: ( __1.69 KB minified and in UMD format__ )
+* `proto` is small: ( __1.74 KB minified and in UMD format__ )
 * `proto` is lightweight. It doesn't attempt to emulate class-based languages or create any fancy features you probably don't actually need (interfaces, abstract classes, etc)
-* It has solid performance: [method calls](http://jsperf.com/js-inheritance-performance-method-calls), [instance creation](http://jsperf.com/js-inheritance-instances)
+* Its one of the fastest inheritance libraries: [method calls](http://jsperf.com/js-inheritance-performance-method-calls), [instance creation](http://jsperf.com/js-inheritance-instances)
 
 [javascriptFunctionProperties]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
 
@@ -236,7 +236,7 @@ Change Log
 =========
 
 * 1.0.17 - Correcting distribution
-* 1.0.16 - optimizing instance creation
+* 1.0.16 - optimizing instance creation - made it about 3 times as fast! Now its one of the fastest inheritance libraries!
 * 1.0.15 - changing to using webpack to make UMD packages
 * 1.0.14 - fixing the name property so if there is no name, 'undefined' doesn't become the functions name
 * 1.0.13 - adding a 'parent' property on the returned proto class
