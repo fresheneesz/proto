@@ -17,7 +17,7 @@ Why Use proto?
 * native objects work with `proto`. `proto` properly* creates classes that inherit from native objects - even all the `Error` types. *_Inheriting certain native javascript objects has some limitations (see below)_
 * [`prototype` and `constructor` properties][javascriptFunctionProperties] are propertly set
 * `proto` doesn't use `Object.create` so it should work with older browsers ( *testers welcome!* )
-* `proto` is small: ( __1.74 KB minified and in UMD format__ )
+* `proto` is small: ( **833 bytes minified and gzipped in UMD format**)
 * `proto` is lightweight. It doesn't attempt to emulate class-based languages or create any fancy features you probably don't actually need (interfaces, abstract classes, etc)
 * Its one of the fastest inheritance libraries: [method calls](http://jsperf.com/js-inheritance-performance-method-calls), [instance creation](http://jsperf.com/js-inheritance-instances)
 
