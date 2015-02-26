@@ -179,7 +179,7 @@ Limitations of `proto`
 * Inheriting from `Error` and other exception types doesn't automatically set a correct `name` property, so you need to set it as a static properly "manually".
 * Objects inheriting from `String` can't use the `toString` method. 
 * Inheriting from `Array` doesn't work.
-* Inheriting from `RegExp` doesn't work either (the results can't use the `test` or `match methods).
+* Inheriting from `RegExp` doesn't work either (the results can't use the `test` or `match` methods).
 * You can't properly access any non-writable properties of a function from the returned proto-object factory though the properties will work correctly on instances. This includes: `name`, `length`, `arguments`, and `caller`.
 * Some properties are read-only and so can't be reset on the prototype object. An example is `name` on firefox.
 
@@ -188,6 +188,7 @@ Todo
 * Browser testing
  * Chrome [x]
  * Firefox [x]
+ * Safari [x]
  * IE11 [ ]
  * IE10 [ ]
  * IE9 [ ]
@@ -234,6 +235,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.16 - optimizing instance creation
 * 1.0.15 - changing to using webpack to make UMD packages
 * 1.0.14 - fixing the name property so if there is no name, 'undefined' doesn't become the functions name
 * 1.0.13 - adding a 'parent' property on the returned proto class

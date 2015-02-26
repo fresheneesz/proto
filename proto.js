@@ -8,7 +8,7 @@ function proto() {
     var args = arguments // minifiable variables
 
     if(args.length == 1) {
-        var parent = {init: noop}   // set noop init so that every parent has an init
+        var parent = {init: noop}
         var prototypeBuilder = args[0]
 
     } else { // length == 2
@@ -34,25 +34,6 @@ function proto() {
     var prototype = new prototypeBuilder(parent)
     namePointer.name = prototype.name
 
-    var ProtoObjectFactory = namedFunction(prototype.name, function() {     // result object factory
-        var x = new F()          // empty object
-
-        if(prototype[init]) {
-            var result = prototype[init].apply(x, arguments)    // populate object via the constructor
-            if(result === proto[protoUndefined])
-                return undefined
-            else if(result !== undefined)
-                return result
-            else
-                return x
-        } else {
-            return x
-        }
-    })
-
-    prototype.constructor = ProtoObjectFactory;    // set the constructor property on the prototype
-
-
     // if there's no init, assume its inheriting a non-proto class, so default to applying the superclass's constructor.
     if(!prototype[init] && parentIsFunction) {
         prototype[init] = function() {
@@ -63,6 +44,30 @@ function proto() {
     // constructor for empty object which will be populated via the constructor
     var F = function() {}
         F[prototypeName] = prototype    // set the prototype for created instances
+
+    var constructorName = prototype.name?prototype.name:''
+    if(prototype[init] === undefined || prototype[init] === noop) {
+        var ProtoObjectFactory = new Function('F',
+            "return function " + constructorName + "(){" +
+                "return new F()" +
+            "}"
+        )(F)
+    } else {
+        // dynamically creating this function cause there's no other way to dynamically name a function
+        var ProtoObjectFactory = new Function('F','i','u','n', // shitty variables cause minifiers aren't gonna minify my function string here
+            "return function " + constructorName + "(){ " +
+                "var x=new F(),r=i.apply(x,arguments)\n" +    // populate object via the constructor
+                "if(r===n)\n" +
+                    "return x\n" +
+                "else if(r===u)\n" +
+                    "return n\n" +
+                "else\n" +
+                    "return r\n" +
+            "}"
+        )(F, prototype[init], proto[protoUndefined]) // note that n is undefined
+    }
+
+    prototype.constructor = ProtoObjectFactory;    // set the constructor property on the prototype
 
     // add all the prototype properties onto the static class as well (so you can access that class when you want to reference superclass properties)
     for(var n in prototype) {
@@ -123,16 +128,4 @@ function addProperty(factoryObject, prototype, property) {
     } catch(e) {
         // do nothing, if a property (like `name`) can't be set, just ignore it
     }
-}
-
-// returns the function named with the passed name
-function namedFunction(name, fn) {
-    if(name !== undefined) {
-        return new Function('fn',
-            "return function " + name + "(){ return fn.apply(this,arguments)}"
-        )(fn)
-    } else {
-        return fn
-    }
-
 }
