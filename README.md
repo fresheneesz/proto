@@ -14,7 +14,7 @@ Why Use proto?
 * easy access to an object's superclass
 * you can give your classes dynamic names
 * you don't hafta use the `new` operator
-* native objects work with `proto`. `proto` properly* creates classes that inherit from native objects - even all the `Error` types. *_Inheriting javascript objects has some limitations (see below)_
+* native objects work with `proto`. `proto` properly* creates classes that inherit from native objects - even all the `Error` types. *_Inheriting certain native javascript objects has some limitations (see below)_
 * [`prototype` and `constructor` properties][javascriptFunctionProperties] are propertly set
 * `proto` doesn't use `Object.create` so it should work with older browsers ( *testers welcome!* )
 * `proto` is small: ( __1.69 KB minified and in UMD format__ )
@@ -95,7 +95,7 @@ var Parent = proto(function() {
     this; // points to the prototype, so set methods and static properties on this
 
     // the name property has an impact on how proto classes are displayed in dev tools
-    this.name = 'MyProto; // set a name for your proto class
+    this.name = 'MyProto'; // set a name for your proto class
 
     this.init = function(v) {   // constructor
         this; // inside methods, 'this' references the instance
