@@ -142,7 +142,8 @@ Parent.name;  // the name property can be accessed directly from the returned pr
 var Child = proto(Parent, function(superclass) {
     this.init = function() {
         superclass.init.apply(this, arguments) // super-class method call
-        // superclass.prototype.init.call(this, arguments) // remember that you probably need to access superclass.prototype for parents that aren't proto objects
+        // superclass.prototype.someMethod.apply(this, arguments) // remember that you probably need to access superclass.prototype for parents that aren't proto objects
+        // superclass.apply(this, arguments) // also remember that parents that aren't proto objects probably won't have an init method, but are constructors themselves (note that this should't be done with proto objectsbecause its creates a new instance)
         this.r = 10
     }
 
