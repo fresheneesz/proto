@@ -19,7 +19,7 @@ Why Use proto?
 * `proto` doesn't use `Object.create` so it should work with older browsers ( *testers welcome!* )
 * `proto` is small: ( **833 bytes minified and gzipped in UMD format**)
 * `proto` is lightweight. It doesn't attempt to emulate class-based languages or create any fancy features you probably don't actually need (interfaces, abstract classes, etc)
-* Its one of the fastest inheritance libraries: [method calls](http://jsperf.com/js-inheritance-performance-method-calls), [instance creation](http://jsperf.com/js-inheritance-instances)
+* Its one of the fastest inheritance libraries: [method calls](http://jsperf.com/js-inheritance-performance-method-calls/2), [instance creation](http://jsperf.com/js-inheritance-instances/2)
 
 [javascriptFunctionProperties]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
 
@@ -141,7 +141,7 @@ Parent.name;  // the name property can be accessed directly from the returned pr
         // [anything else]: that object itself
 var Child = proto(Parent, function(superclass) {
     this.init = function() {
-        superclass.init.call(this, arguments) // super-class method call
+        superclass.init.apply(this, arguments) // super-class method call
         // superclass.prototype.init.call(this, arguments) // remember that you probably need to access superclass.prototype for parents that aren't proto objects
         this.r = 10
     }
