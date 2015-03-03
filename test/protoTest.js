@@ -274,10 +274,17 @@ Unit.test("Testing proto", function() {
                         that.equal(e.toString(), NewErrorName+': o noes')
                         that.ok(e.stack.indexOf('protoTest.js') !== -1) // has a stacktrace
                         that.ok(e.stack.indexOf(NewErrorName) !== -1) // stacktrace has correct name
+
+                        Object.defineProperty(e,'stack', {
+                            get: function() {
+                                return "meow"
+                            }
+                        })
+
+                        that.ok(e.stack === 'meow') // stack should be changeable
                     }
                 }
             })
-
 		
 		    this.test('RegExp', function() {
 		      var MyRegExp = proto(RegExp, function(){})

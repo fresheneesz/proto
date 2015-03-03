@@ -101,7 +101,8 @@ function normalizeErrorObject(ErrorObject, namePointer) {
             /*this.stack = */Object.defineProperty(this, 'stack', { // getter for more optimizy goodness
                 get: function() {
                     return tmp.stack
-                }
+                },
+                configurable: true // so you can change it if you want
             })
         } else {
             this.stack = tmp.stack

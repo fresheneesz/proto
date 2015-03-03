@@ -238,6 +238,7 @@ Contributors
 Change Log
 =========
 
+* 1.0.18 - Setting the 'stack' property of custom errors as 'configurable' so you can change it if you want
 * 1.0.17 - Correcting distribution
 * 1.0.16 - optimizing instance creation - made it about 3 times as fast! Now its one of the fastest inheritance libraries!
 * 1.0.15 - changing to using webpack to make UMD packages
