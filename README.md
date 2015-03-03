@@ -20,7 +20,7 @@ Why Use proto?
 * `proto` is small: (**833 bytes minified and gzipped in UMD format**)
 * `proto` is lightweight. It doesn't attempt to emulate class-based languages or create any fancy features you probably don't actually need (interfaces, abstract classes, etc)
 * It has solid comparison when compared to the fastest inheritance libraries. The following two performance tests use specific methodology to improve their similarity to running code in the real applications:
-  * [testing method calls](http://jsperf.com/js-inheritance-method-calls/4)
+  * [testing method calls](http://jsperf.com/js-inheritance-method-calls/6)
   * [testing instance creation](http://jsperf.com/js-inheritance-object-construction/2)
 
 [javascriptFunctionProperties]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
