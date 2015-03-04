@@ -10,6 +10,7 @@ Why Use proto?
 * `proto` plays nice - you can use proto to inherit from any object, even if it was created with a different inheritance library!
 * `instanceof` works with `proto` classes
 * constructors are inheritable
+* proto can inherit from abstract parents - parents that can't be directly instantiated (many class libraries build the prototype by instantiating the parent class)
 * non-objects can be returned from a constructor (even `undefined`)!
 * easy access to an object's superclass
 * you can give your classes dynamic names
