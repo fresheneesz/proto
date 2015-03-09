@@ -207,6 +207,9 @@ Todo
     * Requires the use of 'new'
     * Maybe sacrifices dynamic prototypes (that change after constructor creation) to get rid of the prototype chain walking (and just merges in functions)
 
+* Consider prodiving a way to create static properties that are only accessible from the returned class object and not on instances
+    * Instance methods would still have to be attached to the returned class object, and this means that static properties couldn't have conflicting names (should cause an error)
+
 How to Contribute!
 ============
 
